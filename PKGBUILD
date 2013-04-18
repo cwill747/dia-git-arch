@@ -4,7 +4,7 @@
 
 pkgname=dia-git
 pkgver=DIA_0_97_0.1100.gbd53261
-pkgrel=1
+pkgrel=2
 pkgdesc="DIAgram Editor from GIT"
 arch=('i686' 'x86_64')
 url="http://live.gnome.org/Dia"
@@ -18,11 +18,12 @@ optdepends=('libpng: for png export support'
 provides=('dia')
 conflicts=('dia')
 install=$pkgname.install
-source=($pkgname.install)
+source=('git://git.gnome.org/dia' 
+        'package.patch')
 noextract=()
-md5sums=('7352454e14410bfd7cc70d8c8b0da03f')
+md5sums=('SKIP' 
+         '7352454e14410bfd7cc70d8c8b0da03f')
 options=('!emptydirs' '!libtool')
-source=(package.patch)
 _gitroot="git://git.gnome.org/dia"
 _gitname="dia-git"
 
@@ -32,32 +33,19 @@ pkgver() {
   git describe --always | sed -e 's|-|.|g'
 }
 
-build() {
-  cd $srcdir
-  msg "Connecting to the GIT server...."
-  
-  if [[ -d "$_gitname" ]] ; then
-    cd $_gitname && git pull origin
-    msg "The local files are updated."
-  else
-    git clone "$_gitroot" "$_gitname"
-  fi
-  
-  msg "GIT checkout done or server timeout"
-  msg "Starting make..."
-#
-   rm -rf $srcdir/$_gitname-build
-   git clone "$srcdir/$_gitname" "$srcdir/$_gitname-build"
-   cd "$srcdir/$_gitname-build"
+prepare() {
+   cd "$srcdir/${_gitname}"
    export PYTHON=/usr/bin/python2
-    patch -p1 <$srcdir/package.patch
+   patch -p1 <$srcdir/package.patch
+}
+
+build() {
+  cd "$srcdir/$_gitname"   
   ./autogen.sh --prefix=/usr \
     --with-cairo \
     --disable-gnome \
     --with-hardbooks
   make
-  #cd doc
-  #make html
 
  }
 

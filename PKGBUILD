@@ -4,7 +4,7 @@
 
 pkgname=dia-git
 pkgver=DIA_0_97_0.1100.gbd53261
-pkgrel=2
+pkgrel=3
 pkgdesc="DIAgram Editor from GIT"
 arch=('i686' 'x86_64')
 url="http://live.gnome.org/Dia"
@@ -25,7 +25,7 @@ md5sums=('SKIP'
          '7352454e14410bfd7cc70d8c8b0da03f')
 options=('!emptydirs' '!libtool')
 _gitroot="git://git.gnome.org/dia"
-_gitname="dia-git"
+_gitname="dia"
 
 
 pkgver() {
@@ -50,7 +50,7 @@ build() {
  }
 
 package(){
-  cd "$srcdir/$_gitname-build"
+  cd "$srcdir/$_gitname"
   make DESTDIR="$pkgdir/" install
   find "$pkgdir" -type d -name .git -exec rm -r '{}' +
 }

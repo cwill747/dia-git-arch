@@ -3,8 +3,8 @@
 # Contributor: Stefan Husmann <stefan-husmann@t-online.de>
 
 pkgname=dia-git
-pkgver=DIA_0_97_0.1100.gbd53261
-pkgrel=3
+pkgver=0.97.0.1100.gbd53261
+pkgrel=4
 pkgdesc="DIAgram Editor from GIT"
 arch=('i686' 'x86_64')
 url="http://live.gnome.org/Dia"
@@ -30,7 +30,7 @@ _gitname="dia"
 
 pkgver() {
   cd "${_gitname}"
-  git describe --always | sed -e 's|-|.|g'
+  git describe --always | sed -e 's/-/./g' -e 's/DIA_//' -e 's/_/./g'
 }
 
 prepare() {

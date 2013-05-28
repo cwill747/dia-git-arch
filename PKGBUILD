@@ -18,11 +18,9 @@ optdepends=('libpng: for png export support'
 provides=('dia')
 conflicts=('dia')
 install=$pkgname.install
-source=('git://git.gnome.org/dia' 
-        'package.patch')
+source=('git://git.gnome.org/dia') 
 noextract=()
-md5sums=('SKIP' 
-         '7352454e14410bfd7cc70d8c8b0da03f')
+md5sums=('SKIP')
 options=('!emptydirs' '!libtool')
 _gitroot="git://git.gnome.org/dia"
 _gitname="dia"
@@ -36,7 +34,6 @@ pkgver() {
 prepare() {
    cd "$srcdir/${_gitname}"
    export PYTHON=/usr/bin/python2
-   patch -p1 <$srcdir/package.patch
 }
 
 build() {

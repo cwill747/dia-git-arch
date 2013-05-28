@@ -3,8 +3,8 @@
 # Contributor: Stefan Husmann <stefan-husmann@t-online.de>
 
 pkgname=dia-git
-pkgver=0.97.0.1100.gbd53261
-pkgrel=4
+pkgver=0.97.0.1149.g1e38ab4
+pkgrel=1
 pkgdesc="DIAgram Editor from GIT"
 arch=('i686' 'x86_64')
 url="http://live.gnome.org/Dia"
